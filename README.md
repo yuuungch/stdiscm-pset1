@@ -1,8 +1,14 @@
 # Problem Set 1 for STDISCM
 
-## Instructions to run:
+## Instructions to Run:
 - Open with Visual Studio
 - Run in Debug mode, can be with (F5) or without debugger (Ctrl + F5)
+
+## Config File Contents:
+| Variable |         Description |
+|----------|--------------------:|
+| X        | number of threads   |
+| y        | prime numbers range |
 
 ## File Directory:
 | File             | Description                                  |
@@ -15,7 +21,7 @@
 | prime_operations | prime number operations used by the 4 files  |
 | main             | main function                                |
 
-## Expected Results for each file:
+## Expected Results for each File:
 | File | Result                                                                                      |
 |------|---------------------------------------------------------------------------------------------|
 | A1   | prime numbers will appear immediately and in pseudo-randomized order (due to search range)  |
