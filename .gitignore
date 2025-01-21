@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/.vs/stdiscm-pset1
+/stdiscm-pset1/x64/Debug/stdiscm-pset1.tlog
+/stdiscm-pset1/x64/Debug
+/x64/Debug
