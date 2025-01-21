@@ -1,4 +1,8 @@
-# stdiscm-pset1
+# Problem Set 1 for STDISCM
+
+## Instructions to run:
+- Open with Visual Studio
+- Run in Debug mode, can be with (F5) or without debugger (Ctrl + F5)
 
 ## File Directory:
 | File             | Description                                  |
@@ -10,3 +14,11 @@
 | config_reader    | config file reader                           |
 | prime_operations | prime number operations used by the 4 files  |
 | main             | main function                                |
+
+## Expected Results for each file:
+| File | Result                                                                                      |
+|------|---------------------------------------------------------------------------------------------|
+| A1   | prime numbers will appear immediately and in pseudo-randomized order (due to search range)  |
+| A2   | prime numbers will appear collectively and in pseudo-randomized order (due to search range) |
+| B1   | prime numbers will appear immediately and in an ordered manner                              |
+| B2   | prime numbers will appear collectively and in an ordered manner                             |
