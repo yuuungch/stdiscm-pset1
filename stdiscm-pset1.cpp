@@ -19,7 +19,11 @@ int main() {
     queue<string> results;
 
     int choice;
-    cout << "Choose a task to run (1 for A1, 2 for A2, 3 for B1, 4 for B2): ";
+    cout << "[1] A1 - immediate printing, search range" << endl;
+	cout << "[2] A2 - deferred printing, search range" << endl;
+	cout << "[3] B1 - immediate printing, linear search" << endl;
+	cout << "[4] B2 - deferred printing, linear search" << endl;
+    cout << "Select choice: ";
     cin >> choice;
 
     auto start = chrono::system_clock::to_time_t(chrono::system_clock::now());

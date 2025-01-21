@@ -24,7 +24,7 @@
 ## Expected Results for each File:
 | File | Result                                                                                      |
 |------|---------------------------------------------------------------------------------------------|
-| A1   | prime numbers will appear immediately and in pseudo-randomized order (due to search range)  |
-| A2   | prime numbers will appear collectively and in pseudo-randomized order (due to search range) |
-| B1   | prime numbers will appear immediately and in an ordered manner                              |
-| B2   | prime numbers will appear collectively and in an ordered manner                             |
+| A1   | prime numbers will appear immediately and grouped according to thread id                    |
+| A2   | prime numbers will appear collectively and arranged in a pseudo-randomized manner           |
+| B1   | prime numbers will appear immediately and arranged ascendingly                              |
+| B2   | prime numbers will appear collectively and arranged ascendingly                             |
