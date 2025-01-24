@@ -19,44 +19,83 @@ int main() {
     queue<string> results;
 
     int choice;
-    cout << "[1] A1 - immediate printing, search range" << endl;
-	cout << "[2] A2 - deferred printing, search range" << endl;
-	cout << "[3] B1 - immediate printing, linear search" << endl;
-	cout << "[4] B2 - deferred printing, linear search" << endl;
-    cout << "Select choice: ";
-    cin >> choice;
+    // Program Loop
+    do {
+        // Command Loop
+        do {
+            cout << "[1] Immediate Printing, Divided Search Range" << endl;
+            cout << "[2] Deferred Printing, Divided Search Range" << endl;
+            cout << "[3] Immediate Printing, Linear Search" << endl;
+            cout << "[4] Deferred Printing, Linear Search" << endl;
+			cout << "[0] Exit" << endl;
+            cout << "Select choice: ";
+            cin >> choice;
 
-    auto start = chrono::system_clock::to_time_t(chrono::system_clock::now());
-    char start_time_str[26];
-    ctime_s(start_time_str, sizeof(start_time_str), &start);
-    cout << "Start Time: " << start_time_str << endl;
+            if (choice < 0 || choice > 4) {
+                cout << "Invalid choice. Please try again." << endl;
+            }
+        } while (choice < 0 || choice > 4);
 
-    switch (choice) {
-    case 1:
-        cout << "Running Task A1..." << endl;
-        taskA1(X, y, mtx);
-        break;
-    case 2:
-        cout << "Running Task A2..." << endl;
-        taskA2(X, y, mtx, results);
-        break;
-    case 3:
-        cout << "Running Task B1..." << endl;
-        taskB1(X, y, mtx);
-        break;
-    case 4:
-        cout << "Running Task B2..." << endl;
-        taskB2(X, y, mtx, results);
-        break;
-    default:
-        cout << "Invalid choice." << endl;
-        break;
-    }
+        //Print Start Time only if command is not exit
+		if (choice >= 1 && choice <= 4) {
+            auto start = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            char start_time_str[26];
+            ctime_s(start_time_str, sizeof(start_time_str), &start);
+            cout << "Start Time: " << start_time_str << endl;
+		}
+        
+        // Run command
+        switch (choice) {
+        case 1:
+            cout << "Running [1] Immediate Printing, Divided Search Range..." << endl;
+            taskA1(X, y, mtx);
+            break;
+        case 2:
+            cout << "Running [2] Deferred Printing, Divided Search Range..." << endl;
+            taskA2(X, y, mtx, results);
+            break;
+        case 3:
+            cout << "Running [3] Immediate Printing, Linear Search..." << endl;
+            taskB1(X, y, mtx);
+            break;
+        case 4:
+            cout << "Running [4] Deferred Printing, Linear Search..." << endl;
+            taskB2(X, y, mtx, results);
+            break;
+        default:
+            break;
+        }
 
-    auto end = chrono::system_clock::to_time_t(chrono::system_clock::now());
-    char end_time_str[26];
-    ctime_s(end_time_str, sizeof(end_time_str), &end);
-    cout << "End Time: " << end_time_str << endl;
+		//Print End Time only if command is not exit
+		if (choice >= 1 && choice <= 4) {
+			auto end = chrono::system_clock::to_time_t(chrono::system_clock::now());
+			char end_time_str[26];
+			ctime_s(end_time_str, sizeof(end_time_str), &end);
+			cout << "End Time: " << end_time_str << endl;
+		}
+
+		// Ask user if they want to run another command
+		if (choice != 0) {
+            // Retry Loop
+            do {
+                cout << "Do you wish to run another command?" << endl;
+                cout << "[1] Yes" << endl;
+                cout << "[0] No" << endl;
+                cout << "Select choice: ";
+                cin >> choice;
+
+				if (choice < 0 || choice > 1) {
+					cout << "Invalid choice. Please try again." << endl;
+				}
+			} while (choice < 0 || choice > 1);
+
+            if (choice == 1) {
+                system("cls");
+            }
+		}
+    } while (choice != 0);
+
+	cout << "Exiting program..." << endl;
 
     return 0;
 }

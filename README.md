@@ -25,6 +25,6 @@
 | File | Result                                                                                      |
 |------|---------------------------------------------------------------------------------------------|
 | A1   | prime numbers will appear immediately and grouped according to thread id                    |
-| A2   | prime numbers will appear collectively and arranged in a pseudo-randomized manner           |
+| A2   | prime numbers will appear collectively and simultaenous with other threads                  |
 | B1   | prime numbers will appear immediately and arranged ascendingly                              |
 | B2   | prime numbers will appear collectively and arranged ascendingly                             |
