@@ -12,6 +12,7 @@
 using namespace std;
 
 int main() {
+    // Reads the config file as soon as program runs
     auto config = read_config("config.txt");
     int X = config["X"];
     int y = config["y"];
@@ -23,6 +24,9 @@ int main() {
     do {
         // Command Loop
         do {
+			cout << "Number of threads: " << X << endl;
+			cout << "Range of numbers: " << y << endl << endl;
+
             cout << "[1] Immediate Printing, Divided Search Range" << endl;
             cout << "[2] Deferred Printing, Divided Search Range" << endl;
             cout << "[3] Immediate Printing, Linear Search" << endl;
