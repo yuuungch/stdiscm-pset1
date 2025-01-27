@@ -1,4 +1,6 @@
 #include "prime_operations.h"
+#include <vector>
+#include <future>
 
 bool is_prime(int n) {
     if (n <= 1) return false;
@@ -30,26 +32,5 @@ void search_primes_deferred(int start, int end, int thread_id, mutex& mtx, queue
             lock_guard<mutex> lock(mtx);
             results.push(result);
         }
-    }
-}
-
-void test_divisibility(int num, int thread_id, mutex& mtx) {
-    if (is_prime(num)) {
-        auto now = chrono::system_clock::to_time_t(chrono::system_clock::now());
-        char time_str[26];
-        ctime_s(time_str, sizeof(time_str), &now);
-        lock_guard<mutex> lock(mtx);
-        cout << "Thread " << thread_id << ": " << num << " at " << time_str;
-    }
-}
-
-void test_divisibility_deferred(int num, int thread_id, mutex& mtx, queue<string>& results) {
-    if (is_prime(num)) {
-        auto now = chrono::system_clock::to_time_t(chrono::system_clock::now());
-        char time_str[26];
-        ctime_s(time_str, sizeof(time_str), &now);
-        string result = "Thread " + to_string(thread_id) + ": " + to_string(num) + " at " + time_str;
-        lock_guard<mutex> lock(mtx);
-        results.push(result);
     }
 }
