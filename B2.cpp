@@ -58,7 +58,6 @@ void taskB2(int X, int y, mutex& mtx, queue<string>& results) {
             if (is_prime && num > 1) {
                 lock_guard<mutex> lock(mtx);
                 primes.push_back(num);
-                cout << num << " ";
             }
         }
         };
