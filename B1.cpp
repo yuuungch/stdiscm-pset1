@@ -55,10 +55,11 @@ void taskB1(int X, int y, mutex& mtx) {
             auto now = chrono::system_clock::to_time_t(chrono::system_clock::now());
             char time_str[26];
             ctime_s(time_str, sizeof(time_str), &now);
+            time_str[strlen(time_str) - 1] = '\0';
 
             lock_guard<mutex> lock(mtx);
             if (is_prime && num > 1) {
-                cout << "Thread " << thread_id << ": " << num << " at " << time_str;
+				cout << time_str << " | Thread " << thread_id << ": " << num << endl;
             }
         }
         };
