@@ -10,6 +10,7 @@
 void taskA2(int X, int y, mutex& mtx, queue<string>& results) {
     vector<thread> threads;
     int step = y / X;
+    cout << "Prime numbers from 1 to " << y << ": ";
 
     for (int i = 0; i < X; ++i) {
         int start = i * step + 1;
@@ -25,4 +26,5 @@ void taskA2(int X, int y, mutex& mtx, queue<string>& results) {
         cout << results.front();
         results.pop();
     }
+	cout << endl;
 }

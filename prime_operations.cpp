@@ -47,7 +47,7 @@ void search_primes_deferred(int start, int end, int thread_id, mutex& mtx, queue
             auto now = chrono::system_clock::to_time_t(chrono::system_clock::now());
             char time_str[26];
             ctime_s(time_str, sizeof(time_str), &now);
-            string result = "Thread " + to_string(thread_id) + ": " + to_string(num) + " at " + time_str;
+            string result = to_string(num) + " ";
             lock_guard<mutex> lock(mtx);
             results.push(result);
         }
