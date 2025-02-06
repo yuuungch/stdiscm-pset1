@@ -1,21 +1,40 @@
-// config_reader.h
 #ifndef CONFIG_READER_H
 #define CONFIG_READER_H
 
 #include <fstream>
-#include <string>
+#include <sstream>
 #include <unordered_map>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
 unordered_map<string, int> read_config(const string& filename) {
     unordered_map<string, int> config;
     ifstream file(filename);
-    string key;
-    int value;
-    while (file >> key >> value) {
+
+    if (!file.is_open()) {
+        cerr << "Error: Could not open config file." << endl;
+        return config;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        istringstream iss(line);
+        string key;
+        int value;
+        if (!(iss >> key >> value)) {
+            cerr << "Error: Invalid line in config file: " << line << endl;
+            continue;
+        }
+        if (value <= 0) {
+            cerr << "Error: Invalid value for " << key << ". Must be a positive integer." << endl;
+            continue;
+        }
         config[key] = value;
     }
+
+    file.close();
     return config;
 }
 

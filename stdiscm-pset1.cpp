@@ -14,8 +14,20 @@ using namespace std;
 int main() {
     // Reads the config file as soon as program runs
     auto config = read_config("config.txt");
+	// Check if config file is missing required parameters
+    if (config.find("X") == config.end() || config.find("y") == config.end()) {
+        cerr << "Error: Config file is missing required parameters." << endl;
+        return 1;
+	}
+	// Check if config file has invalid values for X or y
+    else if (config["X"] <= 0 || config["y"] <= 0) {
+        cerr << "Error: Invalid values for X or y." << endl;
+        return 1;
+    }
+
     int X = config["X"];
     int y = config["y"];
+
     mutex mtx;
     queue<string> results;
 

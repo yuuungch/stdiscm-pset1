@@ -59,6 +59,7 @@ void taskB1(int X, int y, mutex& mtx) {
 
             lock_guard<mutex> lock(mtx);
             if (is_prime && num > 1) {
+                // Print prime number and the thread that found it
 				cout << time_str << " | Thread " << thread_id << ": " << num << endl;
             }
         }
