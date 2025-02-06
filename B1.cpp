@@ -22,29 +22,37 @@ void taskB1(int X, int y, mutex& mtx) {
     for (int num = 1; num <= y; ++num) {
         numbers.push(num);
     }
-
+    // Worker function
     auto worker = [&numbers, &mtx](int thread_id) {
         while (true) {
             int num;
             {
                 lock_guard<mutex> lock(mtx);
+                // If the queue is empty, return
                 if (numbers.empty()) {
                     return;
                 }
+
+                // Get the number from the queue and remove it from the queue
                 num = numbers.front();
                 numbers.pop();
             }
 
+            // Check if the number is prime
             vector<future<bool>> futures;
+            // Set limit as half of n + 1 since no number is divisible by a number greater than half of itself
             int limit = num / 2 + 1;
 
+            // Check divisibility of num by numbers from 2 to limit
             for (int i = 2; i < limit; ++i) {
+                // Check if num is divisible by i
                 futures.push_back(async(launch::async, [i, num]() {
                     return num % i == 0;
                     }));
             }
 
             bool is_prime = true;
+            // Check if any of the futures return true
             for (auto& f : futures) {
                 if (f.get()) {
                     is_prime = false;
