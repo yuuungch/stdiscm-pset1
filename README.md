@@ -1,4 +1,5 @@
 # Problem Set 1 for STDISCM
+**Link to Github Repository: **(Github)[https://github.com/yuuungch/stdiscm-pset1]
 
 ## Instructions to Run:
 - Open with Visual Studio
