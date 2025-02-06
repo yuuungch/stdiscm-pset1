@@ -34,11 +34,12 @@ void taskB2(int X, int y, mutex& mtx, queue<string>& results) {
 
             // Check if the number is prime
             vector<future<bool>> futures;
-            // Set limit as half of n + 1 since no number is divisible by a number greater than half of itself
-            int limit = num / 2 + 1;
 
-            // Check divisibility of num by numbers from 2 to limit
-            for (int i = 2; i < limit; ++i) {
+            // ALGORITHM UPDATE:
+            // Check divisibility of num based on its square root
+            // Explanation: a number that can divide num and is greater than num's square root also has a corresponding factor that is less than the square root.
+            // Result: Less numbers to check per number for divisibility testing, faster runtime.
+            for (int i = 2; i * i <= num; ++i) {
                 // Check if num is divisible by i
                 futures.push_back(async(launch::async, [i, num]() {
                     return num % i == 0;
