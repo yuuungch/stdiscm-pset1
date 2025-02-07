@@ -61,15 +61,20 @@ void taskB1(int X, int y, mutex& mtx) {
                 }
             }
 
-            auto now = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            auto now = chrono::system_clock::now();
+            auto now_time_t = chrono::system_clock::to_time_t(now);
+            auto now_ms = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()) % 1000;
+            auto now_ns = chrono::duration_cast<chrono::nanoseconds>(now.time_since_epoch()) % 1000000;
+
             char time_str[26];
-            ctime_s(time_str, sizeof(time_str), &now);
-            time_str[strlen(time_str) - 1] = '\0';
+            ctime_s(time_str, sizeof(time_str), &now_time_t);
+            time_str[strlen(time_str) - 1] = '\0'; // Remove newline character
+
 
             lock_guard<mutex> lock(mtx);
             if (is_prime && num > 1) {
-                // Print prime number and the thread that found it
-				cout << time_str << " | Thread " << thread_id << ": " << num << endl;
+                // Print prime number and the thread that found it with timestamp including milliseconds and nanoseconds
+                cout << time_str << " | " << setfill('0') << setw(3) << now_ms.count() << " ms " << setfill('0') << setw(6) << now_ns.count() << " ns | Thread " << thread_id << ": " << num << endl;
             }
         }
         };

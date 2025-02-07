@@ -24,12 +24,17 @@ bool is_prime(int n) {
 void search_primes(int start, int end, int thread_id, mutex& mtx) {
     for (int num = start; num <= end; ++num) {
         if (is_prime(num)) {
-            auto now = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            auto now = chrono::system_clock::now();
+            auto now_time_t = chrono::system_clock::to_time_t(now);
+            auto now_ms = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()) % 1000;
+            auto now_ns = chrono::duration_cast<chrono::nanoseconds>(now.time_since_epoch()) % 1000000;
+
             char time_str[26];
-            ctime_s(time_str, sizeof(time_str), &now);
-            time_str[strlen(time_str) - 1] = '\0';
+            ctime_s(time_str, sizeof(time_str), &now_time_t);
+            time_str[strlen(time_str) - 1] = '\0'; // Remove newline character
+
             lock_guard<mutex> lock(mtx);
-            cout << time_str << " | Thread " << thread_id << ": " << num << endl;
+            cout << time_str << " | " << setfill('0') << setw(3) << now_ms.count() << " ms " << setfill('0') << setw(6) << now_ns.count() << " ns | Thread " << thread_id << ": " << num << endl;
         }
     }
 }

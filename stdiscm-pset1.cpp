@@ -52,13 +52,20 @@ int main() {
             }
         } while (choice < 0 || choice > 4);
 
-        //Print Start Time only if command is not exit
-		if (choice >= 1 && choice <= 4) {
-            auto start = chrono::system_clock::to_time_t(chrono::system_clock::now());
+        // Print Start Time only if command is not exit
+        if (choice >= 1 && choice <= 4) {
+            auto start = chrono::system_clock::now();
+            auto start_time_t = chrono::system_clock::to_time_t(start);
+            auto start_ms = chrono::duration_cast<chrono::milliseconds>(start.time_since_epoch()) % 1000;
+            auto start_ns = chrono::duration_cast<chrono::nanoseconds>(start.time_since_epoch()) % 1000000;
+
+            std::tm start_tm;
+            localtime_s(&start_tm, &start_time_t);
             char start_time_str[26];
-            ctime_s(start_time_str, sizeof(start_time_str), &start);
-            cout << "Start Time: " << start_time_str << endl;
-		}
+            strftime(start_time_str, sizeof(start_time_str), "%Y-%m-%d %H:%M:%S", &start_tm);
+
+            cout << "Start Time: " << start_time_str << " | " << setfill('0') << setw(3) << start_ms.count() << " ms " << setfill('0') << setw(6) << start_ns.count() << " ns" << endl;
+        }
         
         // Run command
         switch (choice) {
@@ -82,13 +89,20 @@ int main() {
             break;
         }
 
-		//Print End Time only if command is not exit
-		if (choice >= 1 && choice <= 4) {
-			auto end = chrono::system_clock::to_time_t(chrono::system_clock::now());
-			char end_time_str[26];
-			ctime_s(end_time_str, sizeof(end_time_str), &end);
-			cout << "End Time: " << end_time_str << endl;
-		}
+        // Print End Time only if command is not exit
+        if (choice >= 1 && choice <= 4) {
+            auto end = chrono::system_clock::now();
+            auto end_time_t = chrono::system_clock::to_time_t(end);
+            auto end_ms = chrono::duration_cast<chrono::milliseconds>(end.time_since_epoch()) % 1000;
+            auto end_ns = chrono::duration_cast<chrono::nanoseconds>(end.time_since_epoch()) % 1000000;
+
+            std::tm end_tm;
+            localtime_s(&end_tm, &end_time_t);
+            char end_time_str[26];
+            strftime(end_time_str, sizeof(end_time_str), "%Y-%m-%d %H:%M:%S", &end_tm);
+
+            cout << "End Time: " << end_time_str << " | " << setfill('0') << setw(3) << end_ms.count() << " ms " << setfill('0') << setw(6) << end_ns.count() << " ns" << endl;
+        }
 
 		// Ask user if they want to run another command
 		if (choice != 0) {
